@@ -1,0 +1,33 @@
+.cart {
+  display: flex;
+  background: #5a1a01;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0.5rem 2rem;
+  width: 230px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cart:hover {
+  background: #3b1101;
+  cursor: pointer;
+}
+
+.cart > span {
+  background: #b94517;
+  padding: 0.35rem 1rem;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart svg {
+  height: 20px;
+}
+
+.cart svg path {
+  fill: #fff;
+}
