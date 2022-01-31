@@ -1,6 +1,9 @@
 import styles from "./CartItem.module.css";
+import { CartContext } from "../context/CartContextProvider";
+import { useContext } from "react";
 
 const CartItem = ({ item }) => {
+  const { dispatch } = useContext(CartContext);
   return (
     <li className={styles["list-item"]}>
       <div className={styles.description}>
@@ -11,8 +14,20 @@ const CartItem = ({ item }) => {
         </div>
       </div>
       <div className={styles.controls}>
-        <span>&minus;</span>
-        <span>+</span>
+        <span
+          onClick={() =>
+            dispatch({ type: "UPDATE", payload: item, operator: "-" })
+          }
+        >
+          &minus;
+        </span>
+        <span
+          onClick={() =>
+            dispatch({ type: "UPDATE", payload: item, operator: "+" })
+          }
+        >
+          +
+        </span>
       </div>
     </li>
   );

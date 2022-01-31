@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import Button from "../UI/Button/Button";
 import styles from "./FoodItem.module.css";
 import { CartContext } from "../context/CartContextProvider";

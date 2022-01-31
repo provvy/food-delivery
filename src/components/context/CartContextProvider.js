@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useMemo } from "react";
 export const CartContext = createContext();
 
 const reducer = (state, action) => {
@@ -14,6 +14,20 @@ const reducer = (state, action) => {
         });
         return updatedCart;
       }
+    case "UPDATE":
+      if (action.operator === "-" && action.payload.amount <= 1)
+        return state.filter((item) => item.id !== action.payload.id);
+      const updatedCart = state.map((item) => {
+        if (item.id !== action.payload.id) return item;
+        return {
+          ...item,
+          amount:
+            action.operator === "+"
+              ? action.payload.amount + 1
+              : action.payload.amount - 1,
+        };
+      });
+      return updatedCart;
     default:
       return state;
   }
@@ -22,7 +36,9 @@ const reducer = (state, action) => {
 const CartContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider
+      value={useMemo(() => ({ state, dispatch }), [state, dispatch])}
+    >
       {children}
     </CartContext.Provider>
   );
