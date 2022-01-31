@@ -7,7 +7,7 @@ const FoodList = (props) => {
   return (
     <ul className={styles.list}>
       {props.items.map((item, idx) => (
-        <FoodItem onAdd={props.onAdd} key={idx} food={item} />
+        <FoodItem key={idx} food={item} />
       ))}
     </ul>
   );

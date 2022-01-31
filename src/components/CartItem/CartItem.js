@@ -1,6 +1,6 @@
 import styles from "./CartItem.module.css";
 
-const CartItem = ({ item, changeQuantity }) => {
+const CartItem = ({ item }) => {
   return (
     <li className={styles["list-item"]}>
       <div className={styles.description}>
@@ -11,8 +11,8 @@ const CartItem = ({ item, changeQuantity }) => {
         </div>
       </div>
       <div className={styles.controls}>
-        <span onClick={() => changeQuantity(item, "-")}>&minus;</span>
-        <span onClick={() => changeQuantity(item, "+")}>+</span>
+        <span>&minus;</span>
+        <span>+</span>
       </div>
     </li>
   );

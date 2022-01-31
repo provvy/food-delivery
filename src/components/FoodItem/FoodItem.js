@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useRef, useContext } from "react";
 import Button from "../UI/Button/Button";
 import styles from "./FoodItem.module.css";
+import { CartContext } from "../context/CartContextProvider";
 
-const FoodItem = ({ food, onAdd }) => {
-  const [amount, setAmount] = useState(1);
+const FoodItem = ({ food }) => {
+  let inputRef = useRef(null);
+  const { dispatch } = useContext(CartContext);
   const submitHandler = (e) => {
     e.preventDefault();
-    const newCartItem = { ...food, amount };
-    onAdd(newCartItem);
-    setAmount(1);
+    const newCartItem = { ...food, amount: parseInt(inputRef.current?.value) };
+    dispatch({ type: "ADD", payload: newCartItem });
+    inputRef.current.value = "1";
   };
   return (
     <li className={styles["list-item"]}>
@@ -21,8 +23,8 @@ const FoodItem = ({ food, onAdd }) => {
         <div className={styles.input}>
           <label>Amount</label>
           <input
-            value={amount}
-            onChange={(e) => setAmount(parseInt(e.target.value))}
+            defaultValue={"1"}
+            ref={(el) => (inputRef.current = el)}
             max="99"
             min="1"
             type="number"
