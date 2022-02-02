@@ -8,6 +8,8 @@
   width: 230px;
   font-size: 14px;
   font-weight: 500;
+  transform: scale(1);
+  transition: transform 0.25s linear;
 }
 
 .cart:hover {
@@ -30,4 +32,8 @@
 
 .cart svg path {
   fill: #fff;
+}
+
+.cart.animated {
+  transform: scale(1.2);
 }
