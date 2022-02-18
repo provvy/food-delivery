@@ -4,12 +4,14 @@ import styles from "./CartList.module.css";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContextProvider";
 
-const CartList = ({ closeModal }) => {
+const CartList = ({ closeModal, goCheckout, isCheckout }) => {
   const { state } = useContext(CartContext);
   const amounts = state.map((item) => item.price * item.amount);
   const total = amounts.reduce((a, c) => a + c, 0);
+
   if (state.length <= 0)
     return <h2>There are no items in your cart yet, start ordering!</h2>;
+
   return (
     <ul className={styles.list}>
       {state.map((item, idx) => (
@@ -19,12 +21,16 @@ const CartList = ({ closeModal }) => {
         <h2>Total Amount</h2>
         <h2>€ {total.toFixed(2)}</h2>
       </div>
-      <div className={styles.buttons}>
-        <Button onClick={closeModal} variant type="button">
-          Close
-        </Button>
-        <Button type="button">Order</Button>
-      </div>
+      {!isCheckout && (
+        <div className={styles.buttons}>
+          <Button onClick={closeModal} variant type="button">
+            Close
+          </Button>
+          <Button onClick={goCheckout} type="button">
+            Order
+          </Button>
+        </div>
+      )}
     </ul>
   );
 };

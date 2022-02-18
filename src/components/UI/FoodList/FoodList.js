@@ -2,8 +2,8 @@ import FoodItem from "../../FoodItem/FoodItem";
 import styles from "./FoodList.module.css";
 
 const FoodList = (props) => {
-  if (props.items.length <= 0)
-    return <h2>We're sorry, there are currently no meals available!</h2>;
+  if (props.loading) return <h2 className={styles.message}>Loading...</h2>;
+  if (props.error) return <h2 className={styles.message}>{props.error}</h2>;
   return (
     <ul className={styles.list}>
       {props.items.map((item, idx) => (

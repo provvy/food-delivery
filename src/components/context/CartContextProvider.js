@@ -28,6 +28,8 @@ const reducer = (state, action) => {
         };
       });
       return updatedCart;
+    case "RESET":
+      return [];
     default:
       return state;
   }
@@ -36,9 +38,7 @@ const reducer = (state, action) => {
 const CartContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, []);
   return (
-    <CartContext.Provider
-      value={useMemo(() => ({ state, dispatch }), [state, dispatch])}
-    >
+    <CartContext.Provider value={useMemo(() => ({ state, dispatch }), [state])}>
       {children}
     </CartContext.Provider>
   );
